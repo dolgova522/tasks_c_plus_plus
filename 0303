@@ -86,7 +86,7 @@ public:
     }
 };
 
-int main2() {
+int main() {
     List lst;
     assert(lst.empty());
     lst.push_back(1);
