@@ -53,7 +53,7 @@ Rectangle thebiggestrect(const std::vector<Rectangle>& rects) {
     return Rectangle(bx1, by1, bx2, by2);
 }
 
-int main1() {
+int main() {
   Rectangle a(0, 0, 3, 3);
   Rectangle b(1, 1, 4, 4);
   Rectangle c(2, 0, 5, 2);
