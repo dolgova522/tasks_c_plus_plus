@@ -1,0 +1,14 @@
+#include <iostream>
+#include <cstdio>
+
+int main3() {
+  const char *s = "#include <iostream>\n#"
+                  "include <cstdio>\n"
+                  "\nint main() {"
+                  "\n  const char *s = %c%s%c;"
+                  "\n  printf(\"%%s\", s+1);"
+                  "\n  return 0;"
+                  "\n}";
+  printf(s, 34, s, 34);
+  return 0;
+}
