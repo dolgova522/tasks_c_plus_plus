@@ -1,0 +1,66 @@
+#include <iostream>
+#include <vector>
+
+int count_alive(const std::vector<std::vector<int>>& a, int x, int y) {
+  int s = 0;
+  for (int i = -1; i <= 1; ++i)
+    for (int j = -1; j <= 1; ++j)
+      if ((i || j) && (x + i >= 0) && (x + i < 10) && (y + j >= 0) && (y + j < 10))
+        s += a[x + i][y + j];
+  return s;
+}
+
+void show(const std::vector<std::vector<int>>& a) {
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j)
+      std::cout << (a[i][j] ? '*' : ' ');
+    std::cout << "\n";
+  }
+  std::cout << "----------\n";
+}
+
+bool empty(const std::vector<std::vector<int>>& a) {
+  for (auto& r : a) {
+    for (int x : r) {
+      if (x) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+bool same(const std::vector<std::vector<int>>& a, const std::vector<std::vector<int>>& b) {
+  return a == b;
+}
+
+int main() {
+  srand(time(0));
+  std::vector<std::vector<int>> a(10, std::vector<int>(10));
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      a[i][j] = rand() % 2;
+    }
+  }
+  while (true) {
+    show(a);
+      std::vector<std::vector<int>> b = a;
+      for (int i = 0; i < 10; ++i) {
+        for (int j = 0; j < 10; ++j) {
+          int k = count_alive(a, i, j);
+          if (a[i][j]) {
+            b[i][j] = (k == 2 || k == 3);
+          }
+          else {
+            b[i][j] = (k == 3);
+          }
+        }
+      }
+      if (empty(a) || same(a, b)) {
+        break;
+      }
+      a = b;
+
+  }
+  return 0;
+}
