@@ -2,6 +2,7 @@
 #include <cassert>
 
 class List {
+private:
     struct Node {
         int value;
         Node* next;
@@ -86,22 +87,40 @@ public:
     }
 };
 
+void test1(List& lst) {
+  assert(lst.empty());
+}
+
+void test2(List& lst) {
+  assert(!lst.empty());
+  assert(lst.get() == 2);
+}
+
+void test3(List& lst) {
+  assert(lst.get() == 1 || lst.get() == 2);
+}
+
+void test4(List& lst) {
+  assert(lst.empty());
+}
+
 int main() {
     List lst;
-    assert(lst.empty());
+
+    test1(lst);
     lst.push_back(1);
     lst.push_back(2);
     lst.push_back(3);
     lst.push_front(4);
     lst.show();
-    assert(!lst.empty());
-    assert(lst.get() == 2);
+
+    test2(lst);
+
     lst.pop_front();
     lst.pop_back();
     lst.show();
-    assert(lst.get() == 1 || lst.get() == 2);
+
     lst.pop_front();
     lst.pop_back();
-    assert(lst.empty());
     return 0;
 }
